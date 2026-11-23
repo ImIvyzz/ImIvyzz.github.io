@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ivan Velazquez · Data Analyst</title>
+<meta name="description" content="Data Analyst portfolio: Power BI dashboards, Python & SQL analysis, and AI workflow automation (n8n). Based in Mexico, open to remote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ec; --surface:#fffdf8; --ink:#1b1d1f; --muted:#5d6166; --line:#e2ddd1;
+  --accent:#0f766e; --accent-soft:#d9efec; --warn:#b45309; --warn-soft:#fdf0dc;
+  --radius:14px; --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121416; --surface:#1a1d20; --ink:#ecebe6; --muted:#a3a7ad; --line:#2b2f33;
+    --accent:#2dd4bf; --accent-soft:#123a36; --warn:#f59e0b; --warn-soft:#3a2a10;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121416; --surface:#1a1d20; --ink:#ecebe6; --muted:#a3a7ad; --line:#2b2f33;
+  --accent:#2dd4bf; --accent-soft:#123a36; --warn:#f59e0b; --warn-soft:#3a2a10;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+@media(min-width:720px){.wrap{padding:0 32px}}
+
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{font:700 18px "Fraunces",serif;text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14px}
+.navlinks a{text-decoration:none;color:var(--muted)}
+.navlinks a:hover{color:var(--ink)}
+@media(max-width:620px){.navlinks .hide-sm{display:none}}
+.theme-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:15px}
+
+.hero{padding:72px 0 48px}
+.kicker{font:500 13px "IBM Plex Mono",monospace;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font:700 clamp(38px,7vw,68px)/1.04 "Fraunces",serif;letter-spacing:-.025em;margin:18px 0 18px;max-width:14ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:60ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:48px}
+@media(min-width:720px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);padding:18px 20px}
+.stat b{display:block;font:500 24px "IBM Plex Mono",monospace;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px}
+h2{font:700 clamp(28px,4vw,38px)/1.1 "Fraunces",serif;letter-spacing:-.02em;margin:0}
+.sec-num{font:500 13px "IBM Plex Mono",monospace;color:var(--muted);display:block;margin-bottom:6px}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 13px "IBM Plex Mono",monospace;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:16/9;background:var(--accent-soft);display:grid;place-items:center;position:relative;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb svg{width:70%;height:auto}
+.badge{position:absolute;top:12px;left:12px;font:500 11px "IBM Plex Mono",monospace;background:var(--warn-soft);color:var(--warn);padding:4px 8px;border-radius:6px;letter-spacing:.03em}
+.card-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.meta{font:500 12px "IBM Plex Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.card h3{font:700 22px/1.2 "Fraunces",serif;margin:0;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card p.result{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tag{font:400 12px "IBM Plex Mono",monospace;padding:3px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:14px;margin-top:auto;padding-top:10px}
+.links a,.links button{font:600 14px "IBM Plex Sans",sans-serif;color:var(--accent);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
+.links a:hover,.links button:hover{text-decoration:underline}
+
+.two{display:grid;gap:32px}
+@media(min-width:820px){.two{grid-template-columns:1.1fr .9fr}}
+.about p{font-size:17px;margin:0 0 14px}
+.skill-group{margin-bottom:18px}
+.skill-group h4{font:500 12px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px}
+
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:1fr;gap:4px;padding:18px 0;border-bottom:1px solid var(--line)}
+@media(min-width:720px){.tl li{grid-template-columns:200px 1fr;gap:24px}}
+.tl .when{font:500 13px "IBM Plex Mono",monospace;color:var(--muted)}
+.tl h3{font:600 18px "IBM Plex Sans",sans-serif;margin:0}
+.tl p{margin:4px 0 0;color:var(--muted);font-size:15px}
+
+.contact{background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:40px 28px;display:grid;gap:18px}
+.contact h2{color:var(--bg)}
+.contact p{margin:0;opacity:.8;max-width:55ch}
+.contact .btn{background:transparent;color:var(--bg);border-color:color-mix(in srgb,var(--bg) 40%,transparent);overflow-wrap:anywhere}
+.contact .btn.primary{background:var(--accent);border-color:var(--accent);color:#06201d}
+footer{padding:32px 0 48px;color:var(--muted);font-size:13px}
+
+dialog{border:0;border-radius:var(--radius);padding:0;width:min(1100px,96vw);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.dlg-head button{background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink)}
+dialog iframe{width:100%;aspect-ratio:16/10;border:0;display:block}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Ivan<span>.</span>data</a>
+    <div class="navlinks">
+      <a href="#projects">Projects</a>
+      <a class="hide-sm" href="#about">About</a>
+      <a class="hide-sm" href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="kicker"><span class="dot"></span>Open to remote · Mexico (CST, UTC-6)</div>
+  <h1>I turn messy data into <em>decisions</em> and manual work into workflows.</h1>
+  <p class="lead">Data Analyst working with Power BI, SQL and Python, plus AI-powered automation with n8n and Zapier. Bilingual (EN C1 / ES), with study and work experience in Toronto.</p>
+  <div class="cta">
+    <a class="btn primary" href="#projects">See projects ↓</a>
+    <a class="btn" href="Ivan_Velazquez_Data_Analyst_CV.pdf" download>Download CV</a>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+  <div class="stats">
+    <!-- EDITA: pon solo cifras reales y defendibles -->
+    <div class="stat"><b>1,000+</b><span>client records migrated to a CRM</span></div>
+    <div class="stat"><b>EN · ES</b><span>C1 English, native Spanish</span></div>
+    <div class="stat"><b>CST</b><span>full overlap with US / Canada</span></div>
+    <div class="stat"><b>PBI·SQL·Py</b><span>core stack</span></div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="sec-num">01 /</span><h2>Selected projects</h2></div>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects by tool"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap two">
+    <div class="about">
+      <span class="sec-num">02 /</span><h2 style="margin-bottom:18px">About</h2>
+      <p>I'm a Data Analyst finishing a B.Sc. in Data Science & AI. Since 2023 I've worked with clients to build dashboards, clean and model data, and automate the repetitive parts of their operations.</p>
+      <p>What I care about: a stakeholder opening a dashboard and knowing what to do next, and a team that stops copy-pasting between tools because a workflow does it for them.</p>
+      <p>I studied data analytics in a co-op program in Toronto, so I'm comfortable working in English with North American teams.</p>
+    </div>
+    <div>
+      <span class="sec-num">&nbsp;</span><h2 style="margin-bottom:18px">Toolkit</h2>
+      <div class="skill-group"><h4>Analytics</h4><div class="tags"><span class="tag">SQL</span><span class="tag">Python · Pandas</span><span class="tag">Scikit-learn</span><span class="tag">R</span><span class="tag">Excel</span><span class="tag">Statistics</span></div></div>
+      <div class="skill-group"><h4>BI & Visualization</h4><div class="tags"><span class="tag">Power BI · DAX</span><span class="tag">Power Query</span><span class="tag">Tableau</span><span class="tag">R Shiny</span></div></div>
+      <div class="skill-group"><h4>Automation & AI</h4><div class="tags"><span class="tag">n8n</span><span class="tag">Zapier</span><span class="tag">Monday.com</span><span class="tag">CRM workflows</span><span class="tag">LLM APIs</span><span class="tag">Claude Code</span></div></div>
+      <div class="skill-group"><h4>Methods</h4><div class="tags"><span class="tag">Predictive modeling</span><span class="tag">NLP / text mining</span><span class="tag">Data storytelling</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="sec-num">03 /</span><h2>Experience & education</h2></div></div>
+    <ul class="tl">
+      <li><span class="when">Jun — Aug 2025</span><div><h3>CRM & Process Automation Analyst · Global Visa</h3><p>Implemented a Monday.com CRM for a US visa consultancy, migrated 1,000+ client records and built n8n/Zapier workflows for intake, follow-ups and balanced case assignment across a 6-person team.</p></div></li>
+      <li><span class="when">2023 — 2024</span><div><h3>Data Analytics Co-op · Toronto, Canada</h3><p>Predictive models, text mining and data preparation for internal teams, with insights presented through visualizations.</p></div></li>
+      <li><span class="when">2023 — now</span><div><h3>Freelance Data Analyst</h3><p>Dashboards, data cleaning and analysis projects. See the projects above.</p></div></li>
+      <li><span class="when">2025 — 2027</span><div><h3>B.Sc. Data Science & AI · IEU University</h3><p>Expected December 2027.</p></div></li>
+      <li><span class="when">2023 — 2024</span><div><h3>Diploma in Data Analytics (Co-op) · Toronto School of Management</h3><p>Toronto, Canada.</p></div></li>
+      <li><span class="when">2026</span><div><h3>Training</h3><p>Diploma in Power BI, AI Tools & BI (Cámara de Comercio Exterior) · Claude Code in Action and AI Fluency (Anthropic Academy).</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" style="border-top:0">
+  <div class="wrap">
+    <div class="contact">
+      <span class="sec-num" style="color:inherit;opacity:.6">04 /</span>
+      <h2>Let's work together</h2>
+      <p>Looking for remote Data Analyst, BI or Automation roles, and open to freelance projects.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:ivanignacio143@gmail.com">ivanignacio143@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/TU-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/ImIvyzz" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">© <span id="yr"></span> Ivan Ignacio Velazquez · Built with plain HTML, hosted on GitHub Pages.</footer>
+
+<dialog id="dlg">
+  <div class="dlg-head"><strong id="dlgTitle"></strong><button id="dlgClose" aria-label="Close">×</button></div>
+  <iframe id="dlgFrame" title="Interactive dashboard" loading="lazy" allowfullscreen></iframe>
+</dialog>
+
+<script>
+/* ===================================================================
+   EDITA TUS PROYECTOS AQUÍ.
+   - draft: true  -> muestra la etiqueta "TEMPLATE" (quítala cuando sea real)
+   - image: ruta a una captura (ej. "img/ventas.png"); si no hay, se dibuja un ícono
+   - embed: link "Publish to web" de Power BI o Tableau Public -> abre el dashboard interactivo
+   - github / caseStudy: enlaces opcionales
+   =================================================================== */
+const PROJECTS = [
+  {
+    draft: true,
+    title: "Sales performance dashboard",
+    context: "Freelance · Retail client",
+    problem: "Management tracked sales across stores in disconnected spreadsheets and couldn't see which products or locations were slipping.",
+    result: "[Result: e.g. weekly reporting time cut from X h to Y min; KPIs used in monthly reviews.]",
+    tools: ["Power BI", "DAX", "Power Query", "Excel"],
+    icon: "bars", image: "", embed: "", github: "", caseStudy: ""
+  },
+  {
+    draft: false,
+    title: "CRM implementation & case automation",
+    context: "Global Visa · US visa consultancy · 2025",
+    problem: "Client data and visa-application history were scattered, follow-ups depended on memory, and new cases were assigned to advisors by hand.",
+    result: "Migrated 1,000+ client records into a Monday.com CRM and automated intake, reminders and round-robin case assignment across 4 advisors for a 6-person team.",
+    tools: ["n8n", "Zapier", "Monday.com"],
+    icon: "flow", image: "", embed: "", github: "", caseStudy: ""
+  },
+  {
+    draft: true,
+    title: "Customer review text mining",
+    context: "Academic · Toronto",
+    problem: "Thousands of free-text reviews with no structure: what are customers actually complaining about?",
+    result: "[Result: e.g. topic model surfaced 5 recurring issues; sentiment trend by month.]",
+    tools: ["Python", "NLP", "Pandas"],
+    icon: "text", image: "", embed: "", github: "", caseStudy: ""
+  },
+  {
+    draft: false,
+    title: "Telecom customer churn prediction",
+    context: "Capstone · Toronto School of Management · revised 2026",
+    problem: "1 in 4 customers was leaving, taking 30.5% of monthly revenue. Who leaves, why, and what can a retention program protect?",
+    result: "Model catches 80% of churners (ROC-AUC 0.84); the top third of customers by risk holds 71% of them, ~$250k/year protectable in a 20% retention scenario.",
+    tools: ["Python", "Scikit-learn", "Pandas", "Statistics"],
+    icon: "curve", image: "img/churn_by_segment.png", embed: "", github: "https://github.com/ImIvyzz/telco-churn", caseStudy: ""
+  }
+];
+
+const ICONS = {
+  bars:'<svg viewBox="0 0 200 110" aria-hidden="true"><g fill="var(--accent)"><rect x="10" y="60" width="22" height="40" rx="3"/><rect x="42" y="40" width="22" height="60" rx="3"/><rect x="74" y="50" width="22" height="50" rx="3"/><rect x="106" y="22" width="22" height="78" rx="3"/><rect x="138" y="34" width="22" height="66" rx="3"/><rect x="170" y="10" width="22" height="90" rx="3"/></g></svg>',
+  flow:'<svg viewBox="0 0 200 110" fill="none" stroke="var(--accent)" stroke-width="3" aria-hidden="true"><rect x="8" y="38" width="44" height="34" rx="8"/><rect x="78" y="38" width="44" height="34" rx="8"/><rect x="148" y="10" width="44" height="34" rx="8"/><rect x="148" y="66" width="44" height="34" rx="8"/><path d="M52 55h26M122 55c14 0 12-28 26-28M122 55c14 0 12 28 26 28"/></svg>',
+  text:'<svg viewBox="0 0 200 110" fill="var(--accent)" aria-hidden="true"><rect x="10" y="14" width="120" height="8" rx="4"/><rect x="10" y="32" width="90" height="8" rx="4" opacity=".6"/><rect x="10" y="50" width="140" height="8" rx="4"/><rect x="10" y="68" width="70" height="8" rx="4" opacity=".6"/><rect x="10" y="86" width="110" height="8" rx="4"/><circle cx="170" cy="40" r="18" opacity=".35"/><circle cx="160" cy="78" r="12" opacity=".6"/></svg>',
+  curve:'<svg viewBox="0 0 200 110" fill="none" stroke="var(--accent)" stroke-width="3" aria-hidden="true"><path d="M10 100 C60 98 80 20 190 12"/><g fill="var(--accent)" stroke="none"><circle cx="30" cy="92" r="4"/><circle cx="60" cy="80" r="4"/><circle cx="85" cy="58" r="4"/><circle cx="110" cy="40" r="4"/><circle cx="140" cy="28" r="4"/><circle cx="170" cy="18" r="4"/></g></svg>'
+};
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const grid = document.getElementById('grid');
+const filters = document.getElementById('filters');
+let active = 'All';
+
+function render(){
+  const list = active === 'All' ? PROJECTS : PROJECTS.filter(p => p.tools.includes(active));
+  grid.innerHTML = list.map(p => {
+    const i = PROJECTS.indexOf(p);
+    const thumb = p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)} screenshot" loading="lazy">` : (ICONS[p.icon] || ICONS.bars);
+    const links = [
+      p.embed ? `<button data-embed="${i}">Open live dashboard →</button>` : '',
+      p.caseStudy ? `<a href="${esc(p.caseStudy)}" target="_blank" rel="noopener">Case study →</a>` : '',
+      p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">Code on GitHub →</a>` : ''
+    ].join('');
+    return `<article class="card">
+      <div class="thumb">${p.draft ? '<span class="badge">TEMPLATE · replace with real data</span>' : ''}${thumb}</div>
+      <div class="card-body">
+        <span class="meta">${esc(p.context)}</span>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.problem)}</p>
+        <p class="result">${esc(p.result)}</p>
+        <div class="tags">${p.tools.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        ${links ? `<div class="links">${links}</div>` : ''}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function renderFilters(){
+  const tools = ['All', ...new Set(PROJECTS.flatMap(p => p.tools))];
+  filters.innerHTML = tools.map(t => `<button class="chip" aria-pressed="${t===active}" data-t="${esc(t)}">${esc(t)}</button>`).join('');
+}
+filters.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if(!b) return;
+  active = b.dataset.t; renderFilters(); render();
+});
+
+const dlg = document.getElementById('dlg');
+const frame = document.getElementById('dlgFrame');
+grid.addEventListener('click', e => {
+  const b = e.target.closest('[data-embed]'); if(!b) return;
+  const p = PROJECTS[+b.dataset.embed];
+  document.getElementById('dlgTitle').textContent = p.title;
+  frame.src = p.embed;
+  dlg.showModal();
+});
+document.getElementById('dlgClose').onclick = () => dlg.close();
+dlg.addEventListener('close', () => { frame.src = 'about:blank'; });
+
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch(_){}
+document.getElementById('themeBtn').onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch(_){}
+};
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+renderFilters(); render();
+</script>
+</body>
+</html>
